@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState, setState} from "react";
+import "./App.css";
+import { Label } from "./Input";
+import { AddItems, RemoveItems } from "./Button";
+import { List } from "./List";
 
 function App() {
+  const [item, setItem] = useState("");
+  const [list, setList] = useState([]);
+
+  function onChange(event){
+    setItem(event.target.value);
+  }
+
+  function onClick(){
+    setList([item]);
+  }
+
+
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1>My Shopping List</h1>
       </header>
+      <>
+        <Label onChange={onChange} value={item}/>
+        <AddItems onClick={onClick}/>
+        <RemoveItems onClick={item}/>
+        <List items={item}/>
+      </>
     </div>
   );
 }
